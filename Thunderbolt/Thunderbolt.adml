@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (c) 2016 Microsoft Corporation -->
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Thunderbolt Group Policy Settings</displayName>
+  <description>Various Group Policy settings for the Intel Thunderbolt software.</description>
+  <resources>
+    <stringTable>
+      <!-- Supported on strings -->
+		<string id="SupportedOnWindows7"> This setting is supported from Windows 7 and up</string>
+		
+	  <!-- general -->
+      <string id="TbtServiceSettingsCategory">Thunderbolt</string>
+	  <string id="AllowUserApproval">Allow user to approve attached Thunderbolt devices</string>
+	  <string id="AllowUserApproval_help">
+Sets the registry property "HKLM:\SYSTEM\CurrentControlSet\Services\ThunderboltService\TbtServiceSettings\ApprovalLevel"
+
+Enabled: Normal (non local admin) user can approve attached Thunderbolt devices
+
+Disabled: Only local admins can approve attched Thunderbolt devices
+		  </string>
+    </stringTable>
+    <!--presentationTable>
+      <presentation id="GPOSetUpdateRing_Pres">
+        <dropdownList refId="GPOSetUpdateRing_Dropdown" noSort="true" defaultItem="0">Update ring:</dropdownList>
+      </presentation>
+
+      <presentation id="AutomaticUploadBandwidthPercentage_Pres">
+        <text>Select the maximum percentage of bandwidth to take up when uploading files.</text>
+        <text>Valid values are from 10 - 99.</text>
+        <decimalTextBox refId="BandwidthSpinBox" defaultValue="70" spinStep="1">Bandwidth:</decimalTextBox>
+      </presentation>
+    </presentationTable>-->
+  </resources>
+</policyDefinitionResources>
