@@ -17,11 +17,37 @@
   None, the administrative template files will be overwritten.
 
 .NOTES
-  Version:          1.0
+  Version:          1.1
   Template version: 1.3
   Author:           Axel Timmermans
   Creation Date:    2019-07-28
-  Purpose/Change:   Initial script development 
+  Purpose/Change:   Added some extra info on deployment and usage
+
+  The modified templates have been tested on a live environment using Intune as deployment tool
+  I do not recommend using these templates to manage both the Business and ProPlus versions, nor have I tested this.
+
+  Extra info on replace operation:
+    1. Open the file in your preferred text editor
+    2. Change the first section so that 'target prefix' is office16.Office.Microsoft.Windows (remove the word Policies and trailing full stop. Leave the 'using prefix' as is (no modifications).
+    
+    ORIGINAL:
+    <policyNamespaces>
+    <target prefix="office16" namespace="office16.Office.Policies.Microsoft.Windows" />
+    <using prefix="windows" namespace="Microsoft.Policies.Windows" />
+    </policyNamespaces>
+    
+    MODIFIED:
+    <policyNamespaces>
+    <target prefix="office16" namespace="office16.Office.Microsoft.Windows" />
+    <using prefix="windows" namespace="Microsoft.Policies.Windows" />
+    </policyNamespaces>
+    
+    3. Perform a find and replace operation to do the following for the entire file:
+        FIND: software\policies\microsoft\office\16.0
+        REPLACE WITH: software\microsoft\office\16.0
+        Do this for all relevant ADMX templates that you're going to use for Office 365 Business.
+
+    
   
 .EXAMPLE
   Create Office 365 Business ADMX.ps1 -AdmxFolder "C:\O365-ADMX"
