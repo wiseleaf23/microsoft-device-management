@@ -24,7 +24,7 @@ The value for all these is the same, for example:
 <data id="L_Pathcolon" value="https://contoso.sharepoint.com/"/>
 <data id="L_Datecolon" value="2019-08-12"/>
 <data id="L_Descriptioncolon" value="Contoso SharePoint"/>
-<data id ="L_Allowsubfolders" value="true"/>
+<data id="L_Allowsubfolders" value="true"/>
 ```
 
 Name: `Word trusted location 01`
