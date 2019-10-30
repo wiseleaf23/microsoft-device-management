@@ -1,4 +1,5 @@
 # Configure Default File Format for the Business versions of the Office client apps
+More information on the default file format for Office: https://docs.microsoft.com/en-us/deployoffice/default-file-format-oct
 
 >I have not tested this yet
 
