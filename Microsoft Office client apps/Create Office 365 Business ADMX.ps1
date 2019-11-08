@@ -17,11 +17,11 @@
   None, the administrative template files will be overwritten.
 
 .NOTES
-  Version:          1.1
+  Version:          1.2
   Template version: 1.3
   Author:           Axel Timmermans
   Creation Date:    2019-07-28
-  Purpose/Change:   Added some extra info on deployment and usage
+  Purpose/Change:   Fixed issue with declaration of AdmxFolder variable
 
   The modified templates have been tested on a live environment using Intune as deployment tool
   I do not recommend using these templates to manage both the Business and ProPlus versions, nor have I tested this.
@@ -72,7 +72,7 @@ Param (
 
 #region Declarations---------------------------------------------------------------------------------------
     If(!$AdmxFolder){
-        Read-Host -Prompt "Please enter the path to the folder containing the ADMX files"
+        $AdmxFolder = Read-Host -Prompt "Please enter the path to the folder containing the ADMX files"
     }
 
     $AdmxFiles = Get-ChildItem -Path $AdmxFolder -Recurse -Filter *.admx -Force
