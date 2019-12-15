@@ -14,16 +14,14 @@
   When exporting: all WiFi profiles stored in the folder you enter
 
 .NOTES
-  Version:          1.0
+  Version:          1.2
   Template version: 1.3
   Author:           Axel Timmermans
   Creation Date:    2019-12-15
-  Purpose/Change:   Converted script from two seperate batch files
+  Purpose/Change:   Converted script from two seperate batch files - Minor bugfixes - Added support for listing
   
 .EXAMPLE
-  <Example explanation goes here>
-  
-  <Example goes here. Repeat this attribute for more than one example>
+  Run the script and answer the questions :)
 
 #>
 
@@ -45,23 +43,23 @@ Function Check-FolderExistence {
 #region Variables
 
 $Choice = Read-Host -Prompt "What do you want to do, List, Import or Export? Please enter your choice"
-$Folder = Read-Host -Prompt "Which folder would you like to use to import or export? Please enter the full path, for example C:\Users\JohnDoe\Documents\WiFi profiles"
 
 #endregion
 
-Check-FolderExistence -Folder $Folder
-Swith($Choice){
-    "List"
-        {netsh wlan show profiles}    
-    "Export"
-        {netsh wlan export profile key=clear folder=$Folder}
-    "Import"
-        {
-            $Files = Get-ChildItem $Folder -Recurse -Include *.xml
-            foreach($File in $Files){
-                Write-Host "Now importing" $File.Name -ForegroundColor Green
-                netsh wlan add profile filename="$($File.Name)" user=current
-            }
+Switch($Choice){
+    "List" {netsh wlan show profiles}    
+    "Export" {
+        $Folder = Read-Host -Prompt "Which folder would you like to export to? Please enter the full path, for example C:\Users\JohnDoe\Documents\WiFi profiles"
+        Check-FolderExistence -Folder $Folder
+        netsh wlan export profile key=clear folder=$Folder
+    }
+    "Import" {
+        $Folder = Read-Host -Prompt "Which folder would you like to import from? Please enter the full path, for example C:\Users\JohnDoe\Documents\WiFi profiles"
+        $Files = Get-ChildItem $Folder -Recurse -Include *.xml
+        foreach($File in $Files){
+            Write-Host "Now importing" $File.Name -ForegroundColor Green
+            netsh wlan add profile filename="$($File.FullName)" user=current
         }
+    }
 
 }
