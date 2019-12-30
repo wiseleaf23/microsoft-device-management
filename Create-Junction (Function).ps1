@@ -1,13 +1,17 @@
 ﻿Function Create-Junction {
-    #Version 1.0
+    #Version 1.1
     Param(
-        [Parameter(Mandatory=$true)] [switch] $Hidden, #Mark the junction as hidden
+        [Parameter(Mandatory=$false)] [switch] $Hidden, #Mark the junction as hidden
         [Parameter(Mandatory=$true)] $Source,
         [Parameter(Mandatory=$true)] $Destination
     )
 
     #Move
-    Move-Item -Path "$Source" -Destination "$Destination"
+    If(Test-Path $Source){
+        Move-Item -Path "$Source" -Destination "$Destination"
+    }else {
+        New-Item -ItemType Directory -Path $Destination
+    }
 
     #Create Junction
     New-Item -ItemType Junction -Path $Source -Value $Destination
