@@ -1,0 +1,4 @@
+$EnrolledBy_User_AzureAD = 'AzureAD\' + (Get-Item -Path HKLM:\SOFTWARE\Microsoft\Enrollments\* | Get-ItemProperty | Where-Object -FilterScript {$null -ne $_.UPN}).UPN #For Azure AD only users
+$EnrolledBy_User_SID = (New-Object System.Security.Principal.NTAccount($EnrolledBy_User_AzureAD)).Translate([System.Security.Principal.SecurityIdentifier]).Value #For synced users
+$EnrolledBy_User_BasePath = "HKLM:\SOFTWARE\Microsoft\IdentityStore\Cache\$EnrolledBy_User_SID\IdentityCache\$EnrolledBy_User_SID"
+$EnrolledBy_User_Synced = "$((Get-ItemProperty -Path $EnrolledBy_User_BasePath -Name ProviderName).ProviderName)\$((Get-ItemProperty -Path $EnrolledBy_User_BasePath -Name SAMName).SAMName)"
